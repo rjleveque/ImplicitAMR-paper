@@ -5,8 +5,8 @@ This repository contains the code used to set up and run the examples in the
 manuscript
 
     Implicit Adaptive Mesh Refinement for Dispersive Tsunami Propagation
-    by Marsha J. Berger and Randall J. LeVeque
-    submitted, 2023
+    by Marsha J. Berger and Randall J. LeVeque, submitted, 2023
+    Preprint: https://arxiv.org/abs/???
 
 The python scripts setrun.py in each directory may be useful to see more
 clearly how each run was set up.
