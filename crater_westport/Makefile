@@ -78,7 +78,6 @@ SOURCES = \
 # Include Makefile containing standard definitions and make options:
 include $(CLAWMAKE)
 
-# Construct the topography data
 
 run:
 	$(RUNEXE)

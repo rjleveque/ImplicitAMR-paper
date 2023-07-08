@@ -1,9 +1,10 @@
+The code in this directory requires a version of Clawpack that includes
+the Boussinesq version of GeoClaw.  
 
-Running this code requires the correct version of GeoClaw with Boussinesq
-terms, currently under development.
+It also requires an appropriate version of PETSc and various modifications
+to the Makefile to link to the correct libraries.
 
-It also requires PETSc and various modifications to the Makefile to link
-to the correct libraries.
+See the main README.md file in this repository for more information.
 
 Topo files can be downloaded using fetch_topo.py
 

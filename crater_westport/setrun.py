@@ -470,11 +470,12 @@ def setgeo(rundata):
     # for topography, append lines of the form
     #    [topotype, minlevel, maxlevel, t1, t2, fname]
 
-    #topofiles.append([1, 1, 1, 0., 1.e10, 'flat.tt1'])
-    topodir = '/Users/rjl/topo/WA'
+    #topodir = '/Users/rjl/topo/WA'
+    topodir = '.'
     topofiles.append([3, 1, 1, 0., 1.e10, \
             os.path.join(topodir, 'etopo1_-137_-122_38_51_1min.asc')])
-    topodir = '/Users/rjl/topo/westport_topo'
+    #topodir = '/Users/rjl/topo/westport_topo'
+    topodir = '.'
     topofiles.append([3, 1, 1, 0., 1.e10, \
             os.path.join(topodir, 'grays_harbor_mhw_1sec.asc')])
 
