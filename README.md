@@ -32,9 +32,9 @@ users.  Once that has been done, we plan to update this repository to
 facilitate reproducibility.
 
 In the meantime, we note that the 1D version used to perform the runs for
-the figures in the paper was commit a079486205 from the repository
+the figures in the paper was commit a0794862 from the repository
     https://github.com/rjleveque/geoclaw_1d
-while the 2D code runs in conjunction with commit ??? from a private
+while the 2D code runs in conjunction with commit e17719fa from a private
 repository 
     https://github.com/rjleveque/BoussDev
 Please contact the authors for more details.
