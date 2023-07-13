@@ -6,7 +6,7 @@ manuscript
 
     Implicit Adaptive Mesh Refinement for Dispersive Tsunami Propagation
     by Marsha J. Berger and Randall J. LeVeque, submitted, 2023
-    Preprint: https://arxiv.org/abs/???
+    Preprint: https://arxiv.org/abs/2307.05816
 
 The python scripts setrun.py in each directory may be useful to see more
 clearly how each run was set up.
@@ -39,4 +39,8 @@ repository
     https://github.com/rjleveque/BoussDev
 Please contact the authors for more details.
 
-
+To run the codes using MPI for the implicit solves via PETSc,
+combined with OpenMP for the explicit time stepping in the shallow
+water steps (distributing grid patches between threads), it is
+necessary to use PETSc Version 3.20 (or later) with enhancements
+added by Barry Smith.
