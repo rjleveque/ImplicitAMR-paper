@@ -286,7 +286,7 @@ def setrun(claw_pkg='geoclaw'):
     amrdata.max1d = 60
 
     # max number of refinement levels:
-    amrdata.amr_levels_max = 6   # Set to 6 originally
+    amrdata.amr_levels_max = 6   # Set to 6 for full resolution
 
     # List of refinement ratios at each level (length at least amr_level_max-1)
     # 2 degree, 24', 4', 1', 10", 1/3"
@@ -330,7 +330,7 @@ def setrun(claw_pkg='geoclaw'):
     amrdata.pprint = False      # proj. of tagged points
     amrdata.rprint = False      # print regridding summary
     amrdata.sprint = False      # space/memory output
-    amrdata.tprint = True       # time step reporting each level
+    amrdata.tprint = False       # time step reporting each level
     amrdata.uprint = False      # update/upbnd reporting
     
     # More AMR parameters can be set -- see the defaults in pyclaw/data.py
@@ -351,7 +351,7 @@ def setrun(claw_pkg='geoclaw'):
 
     # Region 1 : (from the dtopo file, below).  
     # Time interval taken from dtopo file : [0,1]
-    regions.append([4, 4, 0, 0, 300., 150., 30., 45.])
+    regions.append([4, 4, 0, 2, 140., 146., 35., 41.])
 
     # Region 2 : Large region encompassing lower 3/4 of domain.
     # Time interval :  (0,18000)
