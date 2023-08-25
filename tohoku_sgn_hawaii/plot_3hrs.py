@@ -5,9 +5,9 @@ output with both SWE and SGN equations, using the UCSB source.
 """
 
 from pylab import *
-import setplot_hawaii
+import setplot
 
-plotdata = setplot_hawaii.setplot()
+plotdata = setplot.setplot()
 
 plotdata.printfigs = False
 plotdata.print_fignos = [11]
