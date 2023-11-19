@@ -25,14 +25,14 @@ RESTART ?= False                    # Should = clawdata.restart in setrun
 # Environment variable FC should be set to fortran compiler, e.g. gfortran
 
 # Compiler flags can be specified here or set as an environment variable
-FFLAGS =  -llapack -lblas
+FFLAGS =  -llapack -lblas -O
 #FFLAGS ?=
 
 # ---------------------------------
 # package sources for this program:
 # ---------------------------------
 
-GEOLIB = $(CLAW)/geoclaw_1d/src/1d_classic/bouss
+GEOLIB = $(CLAW)/geoclaw/src/1d_classic/bouss
 include $(GEOLIB)/Makefile.geoclaw_1d_classic_bouss
 
 # ---------------------------------------

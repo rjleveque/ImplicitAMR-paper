@@ -7,13 +7,7 @@ function setplot is called to set the plot parameters.
 
 """
 
-import os,sys
-BoussDev = os.environ['BoussDev']
-common_python = os.path.join(BoussDev,'common_python')
-if common_python not in sys.path:
-    sys.path.insert(0,common_python)
-import geoplot # from common_python directory, modified to use eta=q[-1,:,:]
-
+from clawpack.visclaw import geoplot
 
 #--------------------------
 def setplot(plotdata=None):

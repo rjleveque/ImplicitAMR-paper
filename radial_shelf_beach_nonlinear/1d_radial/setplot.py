@@ -2,20 +2,12 @@
 
 import os, sys
 
-try:
-    from clawpack.geoclaw_1d import geoplot
-except:
-    print('Could not import from geoclaw_1d')
-
-
-from clawpack.geoclaw_1d.nonuniform_grid_tools import make_mapc2p
+from clawpack.visclaw import geoplot
+from clawpack.geoclaw.nonuniform_grid_tools import make_mapc2p
 import numpy
 from scipy import fft
 from numpy import exp,cos,pi
 from pylab import figure,clf,plot,title
-
-#sys.path.insert(0,os.path.abspath('../../initialization'))
-#import linear_waves
 
 xlimits = [0, 124e3]
 
@@ -118,7 +110,7 @@ def setplot(plotdata):
     plotitem.mapc2p = mapc2p1
 
     plotitem = plotaxes.new_plotitem(plot_type='1d_plot')
-    plotitem.plot_var = geoplot.velocity
+    plotitem.plot_var = geoplot.u_velocity
     plotitem.color = 'b'
     plotitem.MappedGrid = True
     plotitem.mapc2p = mapc2p1
@@ -126,7 +118,7 @@ def setplot(plotdata):
     if outdir2 is not None:
         plotitem = plotaxes.new_plotitem(plot_type='1d_plot')
         plotitem.outdir = outdir2
-        plotitem.plot_var = geoplot.velocity
+        plotitem.plot_var = geoplot.u_velocity
         plotitem.color = 'r'
         plotitem.MappedGrid = True
         plotitem.mapc2p = mapc2p1

@@ -27,3 +27,8 @@ Then make the figures that appear in the paper:
 
     python plot_frames.py
 
+
+Version
+-------
+
+Nov. 2023: Updated for bouss_2d branch to be merged into GeoClaw.

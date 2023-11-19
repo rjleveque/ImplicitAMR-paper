@@ -407,7 +407,6 @@ def setgeo(rundata):
 
     rundata.topo_data.topo_missing = -100.
 
-    #topodir = '/Users/berger/BoussDevMultiLevel5Eqn/examples/bathy'
 
     topofiles = rundata.topo_data.topofiles
     # for topography, append lines of the form

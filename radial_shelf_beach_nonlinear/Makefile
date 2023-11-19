@@ -13,9 +13,10 @@ CLAWMAKE = $(CLAW)/clawutil/src/Makefile.common
 
 CLAW_PKG = geoclaw                  # Clawpack package to use
 
+# These environment variables need to be set properly, usually in your shell:
 #PETSC_DIR=/Users/rjl/git/Clones/petsc
-#PETSC_ARCH=$(PETSC_DIR)/arch-darwin-c-opt
-#PETSC_OPTIONS=-options_file $(PETSC_DIR)/petscMPIoptions # from MJB
+#PETSC_ARCH=arch-darwin-c-opt
+#PETSC_OPTIONS=-options_file $(PETSC_DIR)/petscMPIoptions
 
 EXE = $(PWD)/xgeoclaw
 RUNEXE="${PETSC_ARCH}/bin/mpiexec -n 6 ${EXE}"
@@ -27,26 +28,32 @@ PLOTDIR = _plots                  # Directory for plots
 
 # Environment variable FC should be set to fortran compiler, e.g. gfortran
 
-# Compiler flags can be specified here or set as an environment variable
 FC = gfortran
-INCLUDE += $(PETSC_DIR)/include
-INCLUDE += $(PETSC_ARCH)/include         
-FFLAGS =  -DHAVE_PETSC  -gno-strict-dwarf -fbounds-check -fopenmp \
-      -ffree-line-length-none -std=legacy
-LFLAGS ?=
-LFLAGS += -fopenmp
-LFLAGS += -Wl,-rpath,/Users/rjl/git/Clones/petsc/arch-darwin-c-opt/lib -Wl,-rpath,/Users/rjl/git/Clones/petsc/arch-darwin-c-opt/lib -L/Users/rjl/git/Clones/petsc/arch-darwin-c-opt/lib -Wl,-rpath,/Users/rjl/git/Clones/petsc/arch-darwin-c-opt/lib -L/Users/rjl/git/Clones/petsc/arch-darwin-c-opt/lib -Wl,-rpath,/opt/homebrew/Cellar/gcc/12.2.0/lib/gcc/current/gcc/aarch64-apple-darwin21/12 -L/opt/homebrew/Cellar/gcc/12.2.0/lib/gcc/current/gcc/aarch64-apple-darwin21/12 -Wl,-rpath,/opt/homebrew/Cellar/gcc/12.2.0/lib/gcc/current/gcc -L/opt/homebrew/Cellar/gcc/12.2.0/lib/gcc/current/gcc -Wl,-rpath,/opt/homebrew/Cellar/gcc/12.2.0/lib/gcc/current -L/opt/homebrew/Cellar/gcc/12.2.0/lib/gcc/current -lpetsc -llapack -lblas -lc++ -ldl -lmpifort -lmpi -lpmpi -lgfortran -lemutls_w -lquadmath -lc++ -ldl
 
+# Some compiler flags below are needed for PETSc
+PETSC_INCLUDE = $(PETSC_DIR)/include $(PETSC_DIR)/$(PETSC_ARCH)/include         
+INCLUDE += $(PETSC_INCLUDE)
+PETSC_LFLAGS = $(shell PKG_CONFIG_PATH=$(PETSC_DIR)/$(PETSC_ARCH)/lib/pkgconfig pkg-config --libs-only-L --libs-only-l PETSc)
+
+FFLAGS ?= -O  -gno-strict-dwarf -fbounds-check  -fopenmp \
+      -std=legacy -ffpe-trap='invalid,overflow,zero'
+FFLAGS += -DHAVE_PETSC -ffree-line-length-none
+LFLAGS += $(PETSC_LFLAGS) -fopenmp
 
 
 # ---------------------------------
 # package sources for this program:
 # ---------------------------------
 
-#GEOLIB = $(CLAW)/geoclaw/src/2d/shallow
-GEOLIB = $(BoussDev)/geoclaw_2d_shallow
-#GEOLIB = $(BoussDev)/petsc_2022-10-19/geoclaw_2d_shallow_2Randy
-include $(GEOLIB)/Makefile.geoclaw
+# BOUSSLIB contains library code for Boussinesq solvers,
+# AMRLIB and GEOLIB are standard libraries, defined in case you need to
+# exclude some modele or source file from one of these.
+BOUSSLIB = $(CLAW)/geoclaw/src/2d/bouss
+AMRLIB = $(CLAW)/amrclaw/src/2d
+GEOLIB = $(CLAW)/geoclaw/src/2d/shallow
+
+# See this Makefile for the list of library routines used:
+include $(BOUSSLIB)/Makefile.bouss
 
 # ---------------------------------------
 # package sources specifically to exclude
@@ -66,12 +73,8 @@ EXCLUDE_SOURCES = \
 MODULES = \
 
 SOURCES = \
-  ./setprob.f90 \
   ./qinit.f90 \
   ./flag2refine2.f90 \
-  $(GEOLIB)/rpn2_geoclaw.f \
-  $(GEOLIB)/rpt2_geoclaw_sym.f \
-  $(GEOLIB)/geoclaw_riemann_utils.f \
 
 
 

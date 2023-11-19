@@ -44,16 +44,7 @@ def setrun(claw_pkg='geoclaw'):
     #------------------------------------------------------------------
     # Problem-specific parameters to be written to setprob.data:
     #------------------------------------------------------------------
-    
-    probdata = rundata.new_UserData(name='probdata',fname='setprob.data')
-    probdata.add_param('minLevelBouss', 1,' minlevel for Bouss terms')
-    probdata.add_param('maxLevelBouss', 10,' maxlevel for Bouss terms')
-    probdata.add_param('deepBouss', 5,' min water depth for Bouss terms')
-    probdata.add_param('solver', 3,     ' 1=GMRES, 2=Pardiso, 3=PETSc')
-    probdata.add_param('equations', 2,     ' 1=MadsenSchaffer, 2=SGN')
-    probdata.add_param('alpha', 1.153,  ' If using SGN, else ignore')
-    probdata.add_param('startWithBouss', True, 'Take numSWEsteps of SWE first')
-    probdata.add_param('numSWEsteps', 0,  ' Take this many SWE steps first')
+    # probdata = rundata.new_UserData(name='probdata',fname='setprob.data')
 
 
     #------------------------------------------------------------------
@@ -299,7 +290,7 @@ def setrun(claw_pkg='geoclaw'):
     amrdata = rundata.amrdata
 
     # maximum size of patches in each direction (matters in parallel):
-    amrdata.max1d = 1000
+    amrdata.max1d = 100
 
     # max number of refinement levels:
     amrdata.amr_levels_max = 5
@@ -451,11 +442,20 @@ def setgeo(rundata):
     # for qinit perturbations, append lines of the form: (<= 1 allowed for now!)
     #   [minlev, maxlev, fname]
 
-    # == setfixedgrids.data values ==
-    fixed_grids = rundata.fixed_grid_data
-    # for fixed grids append lines of the form
-    # [t1,t2,noutput,x1,x2,y1,y2,xpoints,ypoints,\
-    #  ioutarrivaltimes,ioutsurfacemax]
+
+    # To use Boussinesq solver, add bouss_data parameters here
+    # Also make sure to use the correct Makefile pointing to bouss version
+    from clawpack.geoclaw.data import BoussData
+    rundata.add_data(BoussData(),'bouss_data')
+    
+    # CHECK ORDER!
+
+    rundata.bouss_data.bouss_equations = 2    # 0=SWE, 1=MS, 2=SGN
+    rundata.bouss_data.bouss_min_level = 1    # coarsest level to apply bouss
+    rundata.bouss_data.bouss_max_level = 10   # finest level to apply bouss
+    rundata.bouss_data.bouss_min_depth = 5.  # depth to switch to SWE
+    rundata.bouss_data.bouss_solver = 3       # 1=GMRES, 2=Pardiso, 3=PETSc
+    rundata.bouss_data.bouss_tstart = 0.      # time to switch from SWE
 
     return rundata
     # end of function setgeo

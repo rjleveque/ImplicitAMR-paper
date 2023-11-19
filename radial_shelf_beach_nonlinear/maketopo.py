@@ -10,7 +10,6 @@ from scipy.interpolate import interp1d
 
 from numpy import *
 
-from mapper import latlong, gcdist
 x1d, z1d = loadtxt('1d_radial/celledges.data',skiprows=1,unpack=True)
 z1d_func = interp1d(x1d, z1d, bounds_error=False, fill_value = z1d[-1])
 
@@ -50,7 +49,6 @@ def topo(x,y):
     import numpy as np
     x0 = 0.
     y0 = 0.
-    #d = gcdist(x0,y0,x,y,Rearth)
     d = np.sqrt((x-x0)**2 + (y-y0)**2)
     z = z1d_func(d)
     return z
