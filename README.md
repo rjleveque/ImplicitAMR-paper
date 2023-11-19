@@ -11,6 +11,11 @@ manuscript
 The python scripts setrun.py in each directory may be useful to see more
 clearly how each run was set up.
 
+**Note:** (November 2023)
+This repository is currently being updated to use the code that
+will be merged into GeoClaw.  The git tag `submitted_aug2023` points to the
+version described below...
+
 Currently it is not easy to actually run these codes, since they depend on
 two sets of new enhancements to GeoClaw that are still under active
 development:

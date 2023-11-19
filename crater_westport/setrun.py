@@ -42,16 +42,7 @@ def setrun(claw_pkg='geoclaw'):
     #------------------------------------------------------------------
     # Problem-specific parameters to be written to setprob.data:
     #------------------------------------------------------------------
-    
-    probdata = rundata.new_UserData(name='probdata',fname='setprob.data')
-    probdata.add_param('minLevelBouss', 1,' minlevel for Bouss terms')
-    probdata.add_param('maxLevelBouss', 10,' maxlevel for Bouss terms')
-    probdata.add_param('deepBouss', 10,' min water depth for Bouss terms')
-    probdata.add_param('solver', 3, ' 1=GMRES, 2=Pardiso, 3=PETSc')
-    probdata.add_param('equation set', 2,' 1=MadsenSchaffer 2=SGN')
-    probdata.add_param('alpha', 1.153,' If using SGN, else ignore')
-    probdata.add_param('startWithBouss',True,' Take numSWEsteps of SWE first')
-    probdata.add_param('numSWEsteps', 0,' Take this many SWE steps first')
+    # probdata = rundata.new_UserData(name='probdata',fname='setprob.data')
 
 
     #------------------------------------------------------------------
@@ -166,7 +157,7 @@ def setrun(claw_pkg='geoclaw'):
     # The current t, dt, and cfl will be printed every time step
     # at AMR levels <= verbosity.  Set verbosity = 0 for no printing.
     #   (E.g. verbosity == 2 means print only on levels 1 and 2.)
-    clawdata.verbosity = 8
+    clawdata.verbosity = 2
     
     
 
@@ -262,39 +253,6 @@ def setrun(claw_pkg='geoclaw'):
     gauges = rundata.gaugedata.gauges
     # for gauges append lines of the form  [gaugeno, x, y, t1, t2]
 
-    rundata.gaugedata.min_time_increment = 5.
-    #rundata.gaugedata.q_out_fields = [0,3]
-    #rundata.gaugedata.aux_out_fields = [0]
-    
-    # DART buoys:
-    #gauges.append([46404, -128.736, 45.857, 0., 1.e10])
-    #gauges.append([46407, -128.832, 42.682, 0., 1.e10])
-    #gauges.append([46419, -129.619, 48.796, 0., 1.e10])
-    
-    # Offshore Long Beach
-    #gauges.append([400, -124.1, 46.3, 0., 1.e10])
-    
-    # Offshore Ocean Shores
-    #gauges.append([401, -124.2, 47, 0., 1.e10])
-    
-    # Offshore La Push
-    #gauges.append([402, -124.67, 47.9, 0., 1.e10])
-    
-    # Offshore Neah Bay
-    #gauges.append([403, -124.61, 48.38, 0., 1.e10])
-
-    
-    # Offshore Ocean Shores
-    xg = -124.181
-    yg = np.linspace(46.94,47.08,8)
-    for k in range(len(yg)):
-        gauges.append([111+k, xg, yg[k], 0, 1e10])
-    
-    # Offshore Westport
-    yg = np.linspace(46.82,46.88,4)
-    xg = np.linspace(-124.108, -124.126, 4)
-    for k in range(len(yg)):
-        gauges.append([101+k, xg[k], yg[k], 0, 1e10])
     
                   
     # --------------
@@ -381,24 +339,11 @@ def setrun(claw_pkg='geoclaw'):
     #  [minlevel,maxlevel,t1,t2,x1,x2,y1,y2]
 
     regions.append([1, 2, 0., 1e9, -180, 180, -90, 90])   #whole world
-    #regions.append([1, 4, 0., 1800., -180, 180, -90, 90])   #whole world
     regions.append([4, 4, 0., 300, -127, -125, 46.3, 47.4]) # initial data
-    #regions.append([1, 4, 1800., 1e9, -127, -122, 44, 49]) 
-    #regions.append([5, 5, 0., 100, -128.2, -127.8, 46.8, 47.2]) # crater
-    #regions.append([1, 4, 0., 1e9, -126.5, -122, 45.5, 49]) # along shore
-
-    #regions.append([1, 4, 0., 35*60, -127, -124, 46, 48])
     regions.append([1, 4, 0., 35*60, -127.5, -124, 46, 48])  #test
-
-    #regions.append([1, 5, 0., 15*60, -126.5, -124, 46.5, 47.3])
     regions.append([1, 5, 0., 15*60, -126.5, -124, 46.2, 47.6])
-    #regions.append([1, 5, 15*60, 1e9,  -125.4, -124, 46.5, 47.3])
     regions.append([1, 5, 15*60, 1e9,  -125.4, -124, 46.2, 47.6])
     regions.append([1, 6, 15*60, 1e9,  -124.75, -124.08, 46.8, 47.0])
-    
-    #regions.append([1, 4, 34*60, 1e9, -124.5, -123.75, 46.8, 47.1]) # along shore
-    #regions.append([5, 5, 35*60, 1e9, -124.20, -124.05, 46.86, 47.0]) # along shore
-    #regions.append([6, 6, 40*60, 1e9, -124.16, -124.08, 46.88, 46.92]) # along shore
     regions.append([7, 7, 40*60, 1e9, -124.16, -124.08, 46.87, 46.92]) # along shore
 
 
@@ -444,9 +389,7 @@ def setgeo(rundata):
     geo_data.coriolis_forcing = False
 
     # == Algorithm and Initial Conditions ==
-    tide_stage = 77.
-    geo_data.sea_level = (tide_stage - 77.)/100.    #  m relative to MHW
-    # ******Set in run_tests.py ******
+    geo_data.sea_level = 0.
 
     geo_data.dry_tolerance = 0.001
     geo_data.friction_forcing = True
@@ -494,12 +437,18 @@ def setgeo(rundata):
     # for qinit perturbations, append lines of the form: (<= 1 allowed for now!)
     #   [minlev, maxlev, fname]
 
-    # == fixedgrids.data values ==
-    rundata.fixed_grid_data.fixedgrids = []
-    fixedgrids = rundata.fixed_grid_data.fixedgrids
-    # for fixed grids append lines of the form
-    # [t1,t2,noutput,x1,x2,y1,y2,xpoints,ypoints,\
-    #  ioutarrivaltimes,ioutsurfacemax]
+
+    # To use Boussinesq solver, add bouss_data parameters here
+    # Also make sure to use the correct Makefile pointing to bouss version
+    from clawpack.geoclaw.data import BoussData
+    rundata.add_data(BoussData(),'bouss_data')
+    
+    rundata.bouss_data.bouss_equations = 2    # 0=SWE, 1=MS, 2=SGN
+    rundata.bouss_data.bouss_min_level = 1    # coarsest level to apply bouss
+    rundata.bouss_data.bouss_max_level = 10   # finest level to apply bouss
+    rundata.bouss_data.bouss_min_depth = 5.  # depth to switch to SWE
+    rundata.bouss_data.bouss_solver = 3       # 1=GMRES, 2=Pardiso, 3=PETSc
+    rundata.bouss_data.bouss_tstart = 0.      # time to switch from SWE
 
     return rundata
     # end of function setgeo

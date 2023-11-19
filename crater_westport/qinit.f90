@@ -50,10 +50,6 @@ subroutine qinit(meqn,mbc,mx,my,xlower,ylower,dx,dy,q,maux,aux)
               eta = 0.d0
               u = 0.d0
 
-              !eta = 5.d0*exp(-((r-50.d3)/20.d3)**2)
-              !eta = 2.d0*exp(-(r/20.d3)**2)
-              !write(6,*) '+++ x,y,r: ',x,y,r
-
               if (r < x_radial(mx_starting_radial-1)) then
                    k = 2
                    eta = 0.d0
