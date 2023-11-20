@@ -217,7 +217,7 @@ def setplot(plotdata=None):
     plotfigure = plotdata.new_plotfigure(name='For paper', figno=120)
     plotfigure.figsize = (13,6)
     plotfigure.facecolor = 'w'
-    plotfigure.show = False
+    #plotfigure.show = False
 
     # Set up for axes in this figure:
     plotaxes = plotfigure.new_plotaxes('pcolor')
@@ -357,7 +357,7 @@ def setplot(plotdata=None):
         title('Eta on transect at t = %.0f' % current_data.t, fontsize=15)
         grid(True)
         if frameno in axis_transect.keys():
-            fname = 'radocean%s.pdf' % str(frameno).zfill(2)
+            fname = 'radocean%s.png' % str(frameno).zfill(2)
             savefig(fname, bbox_inches='tight')
             print('Created ',fname)
 

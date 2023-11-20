@@ -1,3 +1,11 @@
+
+Code for the example in Section 4.1 of the paper
+
+    Implicit Adaptive Mesh Refinement for Dispersive Tsunami Propagation
+    by Marsha J. Berger and Randall J. LeVeque, submitted, 2023
+    Preprint: https://arxiv.org/abs/2307.05816
+    Git repository: https://github.com/rjleveque/ImplicitAMR-paper
+
 The code in this directory requires a version of Clawpack that includes
 the Boussinesq version of GeoClaw, and a version that includes the 
 1d version of GeoClaw.
@@ -22,6 +30,8 @@ the Boussinesq version of GeoClaw.
     make .output
 
 This make take a couple days.
+(Reduce amrdata.amr_levels_max in setrun.py for a faster run with less
+resolution of the narrow solitary waves that develop close to shore.)
 
 Then make the figures that appear in the paper:
 

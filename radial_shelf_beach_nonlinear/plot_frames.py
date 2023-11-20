@@ -2,7 +2,7 @@
 Make plots for the paper.
 Note that figno=120 is used, as specified in setplot.py
 and the xlimits,ylimits for the specific frames used here are set there.
-The savefig to a pdf file is also done in setplot.
+The savefig to a png file is also done in setplot.
 """
 
 from pylab import *
