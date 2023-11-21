@@ -50,9 +50,9 @@ for k,gaugeno in enumerate([21413, 21418]):
         if gaugeno1 == 21418: 
             xlim(20,90)
             if event == 'Fujii':
-                ylim(-1,2)
+                ylim(-1,2.5)
             else:
-                ylim(-2,2)
+                ylim(-2,2.5)
         xlabel('Minutes after earthquake',fontsize=fs2)
 
 
@@ -65,6 +65,6 @@ for k,gaugeno in enumerate([21413, 21418]):
 
     title('Gauge %s comparison using %s source' % (gaugeno1,event),
           fontsize=fs1)
-    fname = 'DART%s_%s.pdf' %  (gaugeno1,event)
+    fname = 'DART%s_%s.png' %  (gaugeno1,event)
     savefig(fname, bbox_inches='tight')
     print('Created ',fname)

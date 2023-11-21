@@ -42,7 +42,7 @@ yticks(fontsize=fs2)
 
 title('Gauge 5680 comparison using %s source' % event,fontsize=fs1)
 
-fname = 'Gauge5680_%s.pdf' %  event
+fname = 'Gauge5680_%s.png' %  event
 savefig(fname, bbox_inches='tight')
 print('Created ',fname)
 

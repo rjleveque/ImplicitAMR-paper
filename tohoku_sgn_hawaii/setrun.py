@@ -9,12 +9,6 @@ that will be read in by the Fortran code.
 import os
 import numpy as np
 
-try:
-    CLAW = os.environ['CLAW']
-except:
-    raise Exception("*** Must first set CLAW enviornment variable")
-
-
 
 #------------------------------
 def setrun(claw_pkg='geoclaw'):
@@ -470,8 +464,8 @@ def setgeo(rundata):
     
     #dtopodir = '/Users/rjl/git/tohoku2011-paper1/sources/'
     dtopodir = './'
-    dtopo_data.dtopofiles.append([1,1,4,dtopodir+'UCSB3.txydz'])
-    #dtopo_data.dtopofiles.append([1,1,1,dtopodir+'fujii.txydz'])
+    #dtopo_data.dtopofiles.append([1,1,4,dtopodir+'UCSB3.txydz'])
+    dtopo_data.dtopofiles.append([1,1,1,dtopodir+'fujii.txydz'])
 
     dtopo_data.dt_max_dtopo = 0.2
 

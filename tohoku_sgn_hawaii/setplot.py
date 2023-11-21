@@ -110,8 +110,14 @@ def setplot(plotdata=None):
     plotaxes = plotfigure.new_plotaxes('imshow')
     plotaxes.title = 'Surface'
     plotaxes.scaled = True
-    plotaxes.xlimits = [132,165]
-    plotaxes.ylimits = [20,50]
+
+    # 2 hours:
+    #plotaxes.xlimits = [132,165]
+    #plotaxes.ylimits = [20,50]
+
+    # 3 hours:
+    plotaxes.xlimits = [132,175]
+    plotaxes.ylimits = [15,45]
     
     def fixup(current_data):
         import pylab
@@ -131,8 +137,8 @@ def setplot(plotdata=None):
     # plotitem.plot_var = geoplot.surface
     plotitem.plot_var = geoplot.surface_or_depth
     plotitem.imshow_cmap = geoplot.tsunami_colormap
-    plotitem.imshow_cmin = -0.5
-    plotitem.imshow_cmax = 0.5
+    plotitem.imshow_cmin = -1.
+    plotitem.imshow_cmax = 1.
     plotitem.add_colorbar = True
     plotitem.colorbar_kwargs = {'extend':'both', 'shrink':0.7}
     plotitem.amr_celledges_show = [0,0,0]
