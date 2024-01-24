@@ -45,7 +45,7 @@ def setplot(plotdata=None):
     plotdata.format = "binary"
 
 
-    clim_ocean = 10 #0.2
+    clim_ocean = 3. #0.2
     clim_coast = 6
 
     cmax_ocean = clim_ocean
@@ -161,8 +161,8 @@ def setplot(plotdata=None):
     plotitem.plot_var = geoplot.surface_or_depth
     plotitem.imshow_cmap = my_cmap
     #plotitem.imshow_cmap = geoplot.tsunami_colormap
-    plotitem.imshow_cmin = cmin_ocean
-    plotitem.imshow_cmax = cmax_ocean
+    plotitem.imshow_cmin = cmin_coast
+    plotitem.imshow_cmax = cmax_coast
     plotitem.add_colorbar = True
     plotitem.colorbar_shrink = 0.5
     plotitem.colorbar_label = 'meters'
@@ -224,9 +224,9 @@ def setplot(plotdata=None):
         legend()
         #xlabel('radial distance')
         xlabel('longitude')
-        xlim(xmin,xmax)
-        #xlim(0, 2*111e3*cos(ylat*pi/180.))
-        ylim(-25,25)
+        #xlim(xmin,xmax)
+        xlim(-124.5,-124.08)
+        ylim(-12,12)
         grid(True)
     plotaxes.afteraxes = plot_xsec
 

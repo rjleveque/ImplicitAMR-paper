@@ -7,7 +7,8 @@ import setplot
 
 plotdata = setplot.setplot()
 
-plotdata.printfigs = False
+#plotdata.printfigs = False
+plotdata.printfigs = True
 
 plotdata.outdir = '_output'
 
