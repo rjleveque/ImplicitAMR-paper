@@ -1,28 +1,43 @@
 # options for PETSC using MPI
-# firsrt 3 are for high level last two are server side. gmres is default, can still use gamg->lu
-# set petsc options to use his file with setenv PETSC_OPTIONS -options_file  /Users/berger/filename
-# set numbers rows per rank using  -pc_mpi_minimum_count_per_rank 10000 (current default)
-#-mpi_ksp_view_mat binary
-#-mpi_ksp_view_rhs binary
-#-mpi_ksp_rtol 1.e-14
-#-mpi_ksp_rtol 1.e-7
--mpi_ksp_rtol 1.e-8
-#-start_in_debugger -debugger_rank 0
+# To use his file, set environment variable PETSC_OPTIONS to
+#       '-options_file  /path/to/this/file'
+
+# Currently using KSP (a Krylov space method) as the main solver
+# and GMRES as the preconditioner (pc)
+
+# For more about the options, see
+#    https://petsc.org/release/manualpages/KSP/KSPSetFromOptions
+#    https://petsc.org/release/manualpages/PC/PCSetFromOptions/
+
+# set min numbers of matrix rows per MPI rank  (default is 10000)
+-pc_mpi_minimum_count_per_rank 5000
+
+# convergence criterion for linear solver (larger than PETSc default):
+-mpi_ksp_rtol 1.e-9
+
+# linear solver:
 -mpi_linear_solver_server
-#-mpi_ksp_monitor
-#-info
--pc_type mpi
 -ksp_type preonly
--mpi_pc_type gamg
 -mpi_ksp_type gmres
+-mpi_ksp_max_it 200
+-mpi_ksp_reuse_preconditioner
+
+# preconditioner:
+-pc_type mpi
+-mpi_pc_type gamg
 -mpi_pc_gamg_symmetrize_graph true
 -mpi_pc_gamg_sym_graph true
-#-fp_trap off
 -mpi_linear_solver_server_view
-#-mpi_ksp_max_it 200
--mpi_ksp_max_it 1000
-#-log_view
-#-mpi_ksp_reuse_preconditioner
-#-mpi_ksp_monitor_true_residual
--options_view
 
+# debug options:
+#-fp_trap off
+#-log_view
+#-start_in_debugger -debugger_rank 0
+#-mpi_ksp_view_mat binary
+#-mpi_ksp_view_rhs binary
+#-mpi_ksp_monitor_true_residual
+#-mpi_ksp_monitor
+#-info
+
+# test if any options are not used:
+#-options_left
