@@ -17,6 +17,9 @@ import matplotlib
 
 from clawpack.visclaw import gridtools
 
+#outdir2 = '/Users/rjl/como/git/BoussDev/examples/westcoast_dxdy/_output'
+outdir2 = None
+outdir3 = os.path.abspath('_output_swe_csr')
 
 # for transect:
 ylat = 46.9
@@ -139,115 +142,27 @@ def setplot(plotdata=None):
 
 
 
-
     #-----------------------------------------
-    # Figure for surface with transect too
+    # Figure with transect for paper
     #-----------------------------------------
-    plotfigure = plotdata.new_plotfigure(name='Surface', figno=20)
-    plotfigure.figsize = (8,8)
+    plotfigure = plotdata.new_plotfigure(name="Grays Harbor w/transect", figno=111)
+    plotfigure.show = True
+    plotfigure.kwargs = {'figsize': (8,8)}
 
-    # Set up for axes in this figure:
-    plotaxes = plotfigure.new_plotaxes('pcolor')
-    plotaxes.title = 'Surface h:m:s after impact'
-    plotaxes.xlimits = [-128,-123]
-    plotaxes.ylimits = [45.75,47.75]
-    plotaxes.axescmd = 'axes([.15,.5,.8,.45])'
-    plotaxes.aspect_latitude = 46.86  # correct aspect ratio at this latitude
-    plotaxes.xticks_kwargs = {'rotation':20}
+    x1trans, x2trans = -124.5,-124.07
+    y1trans, y2trans = 46.90, 46.90
+    xtrans = linspace(x1trans, x2trans, 1000)
+    ytrans = linspace(y1trans, y2trans, 1000)
 
-    # Water
-    #plotitem = plotaxes.new_plotitem(plot_type='2d_pcolor')
-    plotitem = plotaxes.new_plotitem(plot_type='2d_imshow')
-    plotitem.plot_var = geoplot.surface_or_depth
-    plotitem.imshow_cmap = my_cmap
-    #plotitem.imshow_cmap = geoplot.tsunami_colormap
-    plotitem.imshow_cmin = cmin_coast
-    plotitem.imshow_cmax = cmax_coast
-    plotitem.add_colorbar = True
-    plotitem.colorbar_shrink = 0.5
-    plotitem.colorbar_label = 'meters'
-    plotitem.colorbar_extend = 'both'
-    plotitem.amr_celledges_show = [0,0,0]
-    plotitem.amr_patchedges_show = [0,0,1,1,1,1,1,1]
-    plotitem.amr_patchedges_color = ['k','g','r','b','m','y','g','r']
-
-
-    # Land
-    plotitem = plotaxes.new_plotitem(plot_type='2d_imshow')
-    plotitem.plot_var = geoplot.land
-    plotitem.imshow_cmap = geoplot.land_colors
-    plotitem.imshow_cmin = 0.0
-    plotitem.imshow_cmax = 100.0
-    plotitem.add_colorbar = False
-    plotitem.amr_celledges_show = [0,0,0]
-    plotitem.amr_patchedges_show = [0]
-
-
-    # add contour lines of bathy if desired:
-    plotitem = plotaxes.new_plotitem(plot_type='2d_contour')
-    #plotitem.show = False
-    plotitem.plot_var = geoplot.topo
-    plotitem.contour_levels = [-2100, -1000, -400, -100]
-    plotitem.amr_contour_colors = ['k']  # color on each level
-    plotitem.kwargs = {'linestyles':'solid','linewidths':1}
-    plotitem.amr_contour_show = [0,0,1,0,0,0]
-    plotitem.celledges_show = 0
-    plotitem.patchedges_show = 0
-
-    #-----------------------------------------
-    # Figure for transect
-    #-----------------------------------------
-
-    # Set up for axes in this figure:
-    plotaxes = plotfigure.new_plotaxes('radial slice')
-    plotaxes.axescmd = 'axes([.1,.1,.8,.3])'
-
-    def plot_xsec(current_data):
-        from pylab import plot,legend,xlabel,sqrt,grid,xlim,ylim,nan,where
-        from numpy import cos,pi,linspace,zeros,ones,hstack
-        from clawpack.pyclaw import Solution
-        pd = current_data.plotdata
-        frameno = current_data.frameno
-        framesoln = Solution(frameno, path=pd.outdir, file_format=pd.format)
-        eps = 1e-3
-        #xout = linspace(xmin,xmax,1001)
-        xout = hstack((linspace(-126,-124.75,1001), linspace(-124.75,-124,7500)))
-        yout = ylat*ones(xout.shape) + eps
-        eta_out = gridtools.grid_output_2d(framesoln, -1, xout, yout)
-        h_out = gridtools.grid_output_2d(framesoln, 0, xout, yout)
-        B_out = eta_out - h_out
-        eta_wet = where(h_out>0, eta_out, nan)
-        #plot((xout-xmin)*111e3*cos(ylat*pi/180.), eta_out, 
-        #     'b', label='along y=%.3f' % ylat)
-        plot(xout, eta_wet, 'b', label='along y=%.3f' % ylat)
-        plot(xout, B_out, 'g', label='topography')
-        legend()
-        #xlabel('radial distance')
-        xlabel('longitude')
-        #xlim(xmin,xmax)
-        xlim(-124.5,-124.08)
-        ylim(-12,12)
-        grid(True)
-    plotaxes.afteraxes = plot_xsec
-
-
-    #-----------------------------------------
-    # Figure for zoom
-    #-----------------------------------------
-    plotfigure = plotdata.new_plotfigure(name="Gray's Harbor", figno=11)
-    #plotfigure.show = False
-    plotfigure.figsize = (9,7)
 
     # Set up for axes in this figure:
     plotaxes = plotfigure.new_plotaxes()
-    #plotaxes.cmd = 'subplot(122)'
-    plotaxes.title = "Grays Harbor h:m:s after impact"
+    plotaxes.axescmd = 'axes([.15,.5,.8,.45])'
+    plotaxes.title = "h:m:s after impact"
     plotaxes.scaled = False
 
     plotaxes.xlimits = [-124.5,-123.8]
     plotaxes.ylimits = [46.75, 47.1]
-    plotaxes.aspect_latitude = 46.86  # correct aspect ratio at this latitude
-    plotaxes.xticks_kwargs = {'rotation':20}
 
     # Water
     plotitem = plotaxes.new_plotitem(plot_type='2d_imshow')
@@ -281,17 +196,73 @@ def setplot(plotdata=None):
     plotaxes.xlimits = [-124.5,-123.8]
     plotaxes.ylimits = [46.75, 47.1]
 
+    def aa(current_data):
+        from pylab import ticklabel_format, xticks, yticks, gca, cos, pi, imshow, savefig
+        from clawpack.visclaw.plottools import plotbox
+        #addgauges(current_data)
+        ticklabel_format(useOffset=False)
+        xticks(fontsize=10,rotation=20)
+        yticks(fontsize=10)
+        a = gca()
+        a.set_aspect(1./cos(46.86*pi/180.))
+    plotaxes.afteraxes = aa
 
-    # add contour lines of bathy if desired:
-    plotitem = plotaxes.new_plotitem(plot_type='2d_contour')
-    plotitem.show = False
-    plotitem.plot_var = geoplot.topo
-    plotitem.contour_levels = [0.]
-    plotitem.amr_contour_colors = ['k']  # color on each level
-    plotitem.kwargs = {'linestyles':'solid','linewidths':2}
-    plotitem.amr_contour_show = [0,0,0,0,1,0]
-    plotitem.celledges_show = 0
-    plotitem.patchedges_show = 0
+
+    # Set up axes for transect:
+    plotaxes = plotfigure.new_plotaxes('transect')
+    plotaxes.axescmd = 'axes([.1,.1,.8,.3])'
+
+    def plot_xsec(current_data):
+        from pylab import plot,legend,xlabel,ylabel,sqrt,grid,xlim,ylim,\
+                    nan,where,title,fill_between,xticks,yticks,text
+        from numpy import cos,pi,linspace,zeros,ones,hstack
+        from clawpack.pyclaw import Solution
+        pd = current_data.plotdata
+        frameno = current_data.frameno
+        framesoln = Solution(frameno, path=pd.outdir, file_format=pd.format)
+        eta_trans = gridtools.grid_output_2d(framesoln, -1, xtrans, ytrans)
+        h_trans = gridtools.grid_output_2d(framesoln, 0, xtrans, ytrans)
+        B_trans = eta_trans - h_trans
+        eta_wet = where(h_trans>0, eta_trans, nan)
+        fill_between(xtrans, -100*ones(xtrans.shape), B_trans, color=[.8,1,.8])
+        plot(xtrans, B_trans, 'g', label='topography')
+        #plot(xtrans, eta_wet, 'b', label='Surface transect, SGN')
+        plot(xtrans, eta_wet, 'b', label='SGN, α=1.153')
+
+
+        if outdir2 is not None:
+            framesoln = Solution(frameno, path=outdir2, file_format=pd.format)
+            eta_trans = gridtools.grid_output_2d(framesoln, -1, xtrans, ytrans)
+            h_trans = gridtools.grid_output_2d(framesoln, 0, xtrans, ytrans)
+            B_trans = eta_trans - h_trans
+            eta_wet = where(h_trans>0, eta_trans, nan)
+            plot(xtrans, eta_wet, 'r', label='Madsen, B=1/15')
+
+        if outdir3 is not None:
+            framesoln = Solution(frameno, path=outdir3, file_format=pd.format)
+            eta_trans = gridtools.grid_output_2d(framesoln, -1, xtrans, ytrans)
+            h_trans = gridtools.grid_output_2d(framesoln, 0, xtrans, ytrans)
+            B_trans = eta_trans - h_trans
+            eta_wet = where(h_trans>0, eta_trans, nan)
+            plot(xtrans, eta_wet, 'k', label='SWE')
+
+        #xlabel('distance',fontsize=10)
+        ylabel('surface elevation (m)',fontsize=10)
+        xlabel('longitude along transect', fontsize=10)
+        xlim(x1trans,x2trans)
+        ylim(-12,13)
+        grid(True)
+        title('Along transect at y=%.2f' % y1trans,fontsize=12)
+        legend(loc='upper left', fontsize=8)
+        xticks(fontsize=10,rotation=20)
+        yticks(fontsize=10)
+        x1 = -124.19
+        x2 = x1 + 2000/(111e3*cos(pi*47/180))
+        y1 = -8
+        plot([x1,x2],[y1,y1],'k',lw=3)
+        text(0.5*(x1+x2), y1+0.5, '2 km', fontsize=10, ha='center',va='bottom')
+
+    plotaxes.afteraxes = plot_xsec
 
 
     #-----------------------------------------
