@@ -83,6 +83,7 @@ def setplot(plotdata=None):
     plotitem.pcolor_cmin = -4.
     plotitem.pcolor_cmax = 4.
     plotitem.add_colorbar = True
+    plotitem.colorbar_extend = 'both'
     plotitem.amr_celledges_show = [0,0,0]
     plotitem.amr_patchedges_show = [0,1,1,1]
     plotitem.amr_patchedges_color = ['r','m','b','k']
@@ -238,7 +239,7 @@ def setplot(plotdata=None):
         plot([0,124e3], [0,124e3], 'k--', linewidth=0.7)
         xticks(rotation=20)
         axis(axis_planview.get(frameno, 'scaled'))
-        title('Eta at t = %.0f' % current_data.t, fontsize=15)
+        title('Surface at t = %.0f' % current_data.t, fontsize=15)
     plotaxes.afteraxes = fix_planview
 
     # Water
@@ -251,6 +252,7 @@ def setplot(plotdata=None):
     plotitem.add_colorbar = True
     plotitem.colorbar_shrink = 0.5
     plotitem.colorbar_label = 'meters'
+    plotitem.colorbar_extend = 'both'
     plotitem.amr_celledges_show = [0,0,0]
     plotitem.amr_patchedges_show = [0,1,1,1]
     plotitem.amr_patchedges_color = ['r','m','b','yellow','k']
@@ -354,10 +356,10 @@ def setplot(plotdata=None):
                 ylim(-15,15)
         frameno = current_data.frameno
         axis(axis_transect.get(frameno, (0,121e3,-15,15)))
-        title('Eta on transect at t = %.0f' % current_data.t, fontsize=15)
+        title('Surface on transect at t = %.0f' % current_data.t, fontsize=15)
         grid(True)
         if frameno in axis_transect.keys():
-            fname = 'radocean%s.png' % str(frameno).zfill(2)
+            fname = 'radocean%s.pdf' % str(frameno).zfill(2)
             savefig(fname, bbox_inches='tight')
             print('Created ',fname)
 
