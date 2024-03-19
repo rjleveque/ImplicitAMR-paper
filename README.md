@@ -9,17 +9,17 @@ manuscript
     (Revised manuscript submitted March, 2024 with updated examples)
 
 which is available as a [preprint](https://arxiv.org/abs/2307.05816).
-**[revised]**
+**[v2]**
 
 The python scripts setrun.py in each directory may be useful to see more
 clearly how each run was set up.
 
 Running the code requires Clawpack v5.10.0 (or later),
-which *will soon be* available from https://www.clawpack.org/releases.html and permanently archived on Zenodo and also at this DOI: https://doi.org/10.17605/osf.io/kmw6h.
+which *will soon be* available from https://www.clawpack.org/releases.html and permanently archived on Zenodo and also at this DOI: https://doi.org/10.17605/osf.io/kmw6h.  This code was recently merged into the master branch of https://github.com/clawpack/geoclaw and is also available there.
 
 **Notes:** (March 2024)
 
- - Revised after resubmission of paper and release of Clawpack v5.10.0,
+ - Revised after resubmission of paper the release of Clawpack v5.10.0,
    *(very soon!)*.
  
  - Clawpack v5.10.0 includes both:
