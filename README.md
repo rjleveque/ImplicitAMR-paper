@@ -14,33 +14,49 @@ which is available as a [preprint](https://arxiv.org/abs/2307.05816).
 The python scripts setrun.py in each directory may be useful to see more
 clearly how each run was set up.
 
-Running the code requires Clawpack v5.10.0 (or later),
-which *will soon be* available from https://www.clawpack.org/releases.html and permanently archived on Zenodo and also at this DOI: https://doi.org/10.17605/osf.io/kmw6h.  This code was recently merged into the master branch of https://github.com/clawpack/geoclaw and is also available there.
 
-**Notes:** (March 2024)
+**Notes:** (Revised March 2024)
 
- - Revised after resubmission of paper the release of Clawpack v5.10.0,
-   *(very soon!)*.
- 
+ - The version of GeoClaw needed to run the code in this repository
+   was recently merged into the master branch of
+   https://github.com/clawpack/geoclaw and is freely available there.
+   
+ - This code will very soon be released in Clawpack v5.10.0, see
+   https://www.clawpack.org/releases.html.
+   It will also be permanently archived on Zenodo and at this
+   DOI: https://doi.org/10.17605/osf.io/kmw6h.
+
  - Clawpack v5.10.0 includes both:
 
-     - A 1D version of GeoClaw that will support the solution of some Boussinesq
-       equations along with shallow water equations.
-       The 1D code was used to compute reference radially-symmetric solutions
-       for comparison with the 2D simulations for some examples.
-       See https://www.clawpack.org/geoclaw1d.html.
-
-     - A 2D version of GeoClaw with implicit timestepping coupled with AMR, and applied to the Boussinesq-type
-     equations described in the paper. 
+     - A 2D version of GeoClaw with implicit timestepping coupled with AMR,
+       and applied to the Boussinesq-type equations described in the paper. 
        See https://www.clawpack.org/bouss2d.html.
-
+       
+     - A 1D version of GeoClaw that also supports the solution of some 
+       Boussinesq-type equations, along with shallow water equations.
+       The 1D code is used to compute reference radially-symmetric solutions
+       for comparison with the 2D simulations for the example in
+       `radial_shelf_beach_nonlinear`.
+       See https://www.clawpack.org/geoclaw1d.html.
 
  - To run the codes using MPI for the implicit solves via PETSc,
    combined with OpenMP for the explicit time stepping in the shallow
    water steps (distributing grid patches between threads), it is
    necessary to use PETSc Version 3.20 (or later) with enhancements
    added by Barry Smith.
+   
+ - The `file setenv_rjl.sh` is a bash script for the environment
+   variables as set by RJL on the laptop where the timings
+   were performed.  These environment variables must be set properly
+   for your computer.
+   
+ - The file `petscMPIoptions` lists the PETSc options used for the
+   linear solvers, and is referenced from the `Makefile` in each
+   example directory.
 
- - The code used for the resubmitted paper is tagged as
+ - The version of this repository used for the resubmitted paper is tagged as
    `resubmitted_march2024`.  A zip file of the code used for the final
-   published paper will eventually be archived on Zenodo.
+   published paper will be archived in the Supplementary Materials
+   for the paper, and will eventually also be archived on Zenodo.
+   
+   
