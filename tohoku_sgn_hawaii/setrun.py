@@ -464,8 +464,8 @@ def setgeo(rundata):
     
     #dtopodir = '/Users/rjl/git/tohoku2011-paper1/sources/'
     dtopodir = './'
-    #dtopo_data.dtopofiles.append([1,1,4,dtopodir+'UCSB3.txydz'])
-    dtopo_data.dtopofiles.append([1,1,1,dtopodir+'fujii.txydz'])
+    dtopo_data.dtopofiles.append([1,1,4,dtopodir+'UCSB3.txydz'])
+    #dtopo_data.dtopofiles.append([1,1,1,dtopodir+'fujii.txydz'])
 
     dtopo_data.dt_max_dtopo = 0.2
 

@@ -73,7 +73,7 @@ def setplot(plotdata=None):
     plotitem.add_colorbar = True
     plotitem.amr_celledges_show = [0,0,0]
     plotitem.patchedges_show = 0
-    #plotitem.amr_patchedges_show = [1,1,1,0,0]  # only coarse levels
+    plotitem.amr_patchedges_show = [0,1,1,1,0]  # only coarse levels
 
     # Land
     plotitem = plotaxes.new_plotitem(plot_type='2d_imshow')
@@ -84,7 +84,7 @@ def setplot(plotdata=None):
     plotitem.add_colorbar = False
     plotitem.amr_celledges_show = [0,0,0]
     plotitem.patchedges_show = 0
-    #plotitem.amr_patchedges_show = [1,1,1,0,0]  # only coarse levels
+    plotitem.amr_patchedges_show = [0,1,1,1,0]  # only coarse levels
     plotaxes.xlimits = 'auto'
     plotaxes.ylimits = 'auto'
 

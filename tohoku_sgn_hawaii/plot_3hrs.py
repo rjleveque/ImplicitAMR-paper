@@ -23,9 +23,10 @@ title('SWE at 3 hours, %s source' % event, fontsize=15)
 
 # Add transect line:
 plot([163.454,170.631], [31.1458,26.5282], color='k', linewidth=1.0)
+text(170.6,26.45,'transect',ha='center',va='top',fontsize=12)
 
 
-fname = '%s_SWE_3hrs.png' % event
+fname = '%s_SWE_3hrs.pdf' % event
 savefig(fname, bbox_inches='tight')
 print('Created ',fname)
 
@@ -38,7 +39,8 @@ title('SGN at 3 hours, %s source' % event, fontsize=15)
 
 # Add transect line:
 plot([163.454,170.631], [31.1458,26.5282], color='k', linewidth=1.0)
+text(170.6,26.45,'transect',ha='center',va='top',fontsize=12)
 
-fname = '%s_SGN_3hrs.png' % event
+fname = '%s_SGN_3hrs.pdf' % event
 savefig(fname, bbox_inches='tight')
 print('Created ',fname)
