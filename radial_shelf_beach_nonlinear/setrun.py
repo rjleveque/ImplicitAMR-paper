@@ -290,7 +290,7 @@ def setrun(claw_pkg='geoclaw'):
     amrdata = rundata.amrdata
 
     # maximum size of patches in each direction (matters in parallel):
-    amrdata.max1d = 100
+    amrdata.max1d = 1000   # 1000 used for plots in paper, 100 for timings
 
     # max number of refinement levels:
     amrdata.amr_levels_max = 5
@@ -413,8 +413,6 @@ def setgeo(rundata):
     refinement_data = rundata.refinement_data
     refinement_data.variable_dt_refinement_ratios = True
     refinement_data.wave_tolerance = 0.1
-    refinement_data.deep_depth = 1e2
-    refinement_data.max_level_deep = 30
 
     # == settopo.data values ==
 
@@ -448,9 +446,7 @@ def setgeo(rundata):
     from clawpack.geoclaw.data import BoussData
     rundata.add_data(BoussData(),'bouss_data')
     
-    # CHECK ORDER!
-
-    rundata.bouss_data.bouss_equations = 2    # 0=SWE, 1=MS, 2=SGN
+    rundata.bouss_data.bouss_equations = 0    # 0=SWE, 1=MS, 2=SGN
     rundata.bouss_data.bouss_min_level = 1    # coarsest level to apply bouss
     rundata.bouss_data.bouss_max_level = 10   # finest level to apply bouss
     rundata.bouss_data.bouss_min_depth = 5.  # depth to switch to SWE
@@ -464,11 +460,10 @@ def setgeo(rundata):
 
 
 if __name__ == '__main__':
+
     # Set up run-time parameters and write all data files.
     import sys
-    #from clawpack.geoclaw import kmltools
 
     rundata = setrun(*sys.argv[1:])
     rundata.write()
 
-    #kmltools.make_input_data_kmls(rundata)
