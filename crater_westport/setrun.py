@@ -400,8 +400,6 @@ def setgeo(rundata):
     refinement_data = rundata.refinement_data
     refinement_data.variable_dt_refinement_ratios = True
     refinement_data.wave_tolerance = 0.1
-    refinement_data.deep_depth = 1e2
-    refinement_data.max_level_deep = 30
 
     # == settopo.data values ==
 
@@ -410,23 +408,19 @@ def setgeo(rundata):
 
     topofiles = rundata.topo_data.topofiles
     # for topography, append lines of the form
-    #    [topotype, minlevel, maxlevel, t1, t2, fname]
+    #    [topotype, fname]
 
-    #topodir = '/Users/rjl/topo/WA'
     topodir = '.'
-    topofiles.append([3, 1, 1, 0., 1.e10, \
-            os.path.join(topodir, 'etopo1_-137_-122_38_51_1min.asc')])
-    #topodir = '/Users/rjl/topo/westport_topo'
-    topodir = '.'
-    topofiles.append([3, 1, 1, 0., 1.e10, \
-            os.path.join(topodir, 'grays_harbor_mhw_1sec.asc')])
+    topofiles.append([3, \
+                   os.path.join(topodir, 'etopo1_-137_-122_38_51_1min.asc')])
+    topofiles.append([3, os.path.join(topodir, 'grays_harbor_mhw_1sec.asc')])
 
 
     # == setdtopo.data values ==
     rundata.dtopo_data.dtopofiles = []
     dtopofiles = rundata.dtopo_data.dtopofiles
     # for moving topography, append lines of the form :  
-    #   [topotype, minlevel,maxlevel,fname]
+    #   [topotype, fname]
 
 
     # == setqinit.data values ==
@@ -434,7 +428,7 @@ def setgeo(rundata):
     rundata.qinit_data.qinitfiles = []
     qinitfiles = rundata.qinit_data.qinitfiles 
     # for qinit perturbations, append lines of the form: (<= 1 allowed for now!)
-    #   [minlev, maxlev, fname]
+    #   [fname]
 
 
     # To use Boussinesq solver, add bouss_data parameters here

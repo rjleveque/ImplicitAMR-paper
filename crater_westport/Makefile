@@ -17,6 +17,7 @@ CLAW_PKG = geoclaw                  # Clawpack package to use
 #PETSC_DIR=/Users/rjl/git/Clones/petsc
 #PETSC_ARCH=arch-darwin-c-opt
 #PETSC_OPTIONS=-options_file $(PETSC_DIR)/petscMPIoptions
+PETSC_OPTIONS=-options_file ../petscMPIoptions
 
 EXE = $(PWD)/xgeoclaw
 RUNEXE="${PETSC_DIR}/${PETSC_ARCH}/bin/mpiexec -n 6 "

@@ -17,9 +17,13 @@ import matplotlib
 
 from clawpack.visclaw import gridtools
 
+# MS results:
 #outdir2 = '/Users/rjl/como/git/BoussDev/examples/westcoast_dxdy/_output'
 outdir2 = None
-outdir3 = os.path.abspath('_output_swe_csr')
+
+# SWE results:
+#outdir3 = os.path.abspath('_output_SWE')
+outdir3 = None
 
 # for transect:
 ylat = 46.9
@@ -244,7 +248,7 @@ def setplot(plotdata=None):
             h_trans = gridtools.grid_output_2d(framesoln, 0, xtrans, ytrans)
             B_trans = eta_trans - h_trans
             eta_wet = where(h_trans>0, eta_trans, nan)
-            plot(xtrans, eta_wet, 'k', label='SWE')
+            plot(xtrans, eta_wet, 'k', lw=0.8, label='SWE')
 
         #xlabel('distance',fontsize=10)
         ylabel('surface elevation (m)',fontsize=10)
