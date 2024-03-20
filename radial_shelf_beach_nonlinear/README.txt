@@ -4,7 +4,7 @@ Code for the example in Section 4.1 of the paper
     Implicit Adaptive Mesh Refinement for Dispersive Tsunami Propagation
     by Marsha J. Berger and Randall J. LeVeque, submitted, 2023
     (revised March, 2024)
-    Preprint: https://arxiv.org/abs/2307.05816
+    Preprint: https://arxiv.org/abs/2307.05816 [v2]
     Git repository: https://github.com/rjleveque/ImplicitAMR-paper
 
 The code in this directory requires Clawpack v5.10.0, which includes

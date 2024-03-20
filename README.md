@@ -51,8 +51,12 @@ clearly how each run was set up.
    for your computer.
    
  - The file `petscMPIoptions` lists the PETSc options used for the
-   linear solvers, and is referenced from the `Makefile` in each
-   example directory.
+   linear solvers. You must set an environment variable `PETSC_OPTIONS` to
+   be the full path to this file. 
+
+ - Alternatively, rather than setting environment variables, you can
+   modify the `Makefile` in each example directory as indicated in the lines
+   that are commented out.
 
  - The version of this repository used for the resubmitted paper is tagged as
    `resubmitted_march2024`.  A zip file of the code used for the final

@@ -3,7 +3,7 @@ Code for the example in Section 4.2 of the paper
     Implicit Adaptive Mesh Refinement for Dispersive Tsunami Propagation
     by Marsha J. Berger and Randall J. LeVeque, submitted, 2023
     (revised March, 2024)
-    Preprint: https://arxiv.org/abs/2307.05816
+    Preprint: https://arxiv.org/abs/2307.05816 [v2]
     Git repository: https://github.com/rjleveque/ImplicitAMR-paper
 
 The code in this directory requires Clawpack v5.10.0, which includes
@@ -16,11 +16,14 @@ See https://www.clawpack.org/bouss2d.html for more details.
 
 See the main README.md file in this repository for more information.
 
-Topo files can be downloaded using fetch_topo.py
+The required topo file can be downloaded using fetch_topo.py
 
 The UCSB and Fujii source dtopo files can be downloaded using fetch_dtopo.py
 which gets them from:
     https://github.com/rjleveque/tohoku2011-paper1/tree/master/sources
+
+You can download both the topo and dtopo files by the single command:
+    make topo
 
 In setrun.py:
 
