@@ -14,11 +14,12 @@ CLAWMAKE = $(CLAW)/clawutil/src/Makefile.common
 CLAW_PKG = geoclaw                  # Clawpack package to use
 
 # These environment variables need to be set properly, usually in your shell:
-#PETSC_DIR=/Users/rjl/git/Clones/petsc
+# (or set these variable explicitly here in the Makefile)
+#PETSC_DIR=/Users/rjl/petsc
 #PETSC_ARCH=arch-darwin-c-opt
-
-# options for PETSc such as solver, tolerance, etc.
-PETSC_OPTIONS=-options_file ../petscMPIoptions
+#PETSC_OPTIONS=-options_file /Users/rjl/petscMPIoptions
+# sets the PETSc convergence criteria, etc.
+# the settings used for the paper are in  ImplicitAMR-paper/petscMPIoptions
 
 EXE = $(PWD)/xgeoclaw
 RUNEXE="${PETSC_DIR}/${PETSC_ARCH}/bin/mpiexec -n 6 "
