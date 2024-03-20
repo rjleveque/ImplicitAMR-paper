@@ -443,6 +443,11 @@ def setgeo(rundata):
     rundata.bouss_data.bouss_solver = 3       # 1=GMRES, 2=Pardiso, 3=PETSc
     rundata.bouss_data.bouss_tstart = 0.      # time to switch from SWE
 
+    # Omit source terms for sphere, as in v5.9.2 and earlier.
+    # The proper spherical source terms for Boussinesq equations are still
+    # under investigation.  
+    rundata.geo_data.sphere_source = 0
+
     return rundata
     # end of function setgeo
     # ----------------------
