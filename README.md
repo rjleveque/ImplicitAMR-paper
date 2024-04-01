@@ -17,13 +17,13 @@ clearly how each run was set up.
 
 **Notes:** (Revised March 2024)
 
- - The version of GeoClaw needed to run the code in this repository
+ - The version of [GeoClaw](http://www.geoclaw.org) needed to run the code in this repository
    was recently merged into the master branch of
    https://github.com/clawpack/geoclaw and is freely available there.
    
- - This code will very soon be released in Clawpack v5.10.0, see
-   https://www.clawpack.org/releases.html.
-   It will also be permanently archived on Zenodo and at this
+ - This code has now been released in
+   [Clawpack v5.10.0](https://www.clawpack.org/release_5_10_0.html).
+   It is also permanently archived on Zenodo, and at this
    DOI: https://doi.org/10.17605/osf.io/kmw6h.
 
  - Clawpack v5.10.0 includes both:
