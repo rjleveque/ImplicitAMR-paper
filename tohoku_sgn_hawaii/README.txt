@@ -67,4 +67,4 @@ Version
 
 Nov. 2023: Updated for bouss_2d branch to be merged into GeoClaw.
 
-March 2024: Updated for resbumission of paper
+March 2024: Updated for resubmission of paper
