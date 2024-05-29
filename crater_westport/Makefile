@@ -1,4 +1,13 @@
 # Makefile for Clawpack code in this directory.
+
+# Version for Boussinesq solvers in GeoClaw, which requires PETSc and MPI
+# See https://www.clawpack.org/bouss2d.html
+#
+# Execute this command to check that enviornment variables set properly:
+#    make check
+# before compiling or executing the code!
+# Then do `make new` if using the Boussinesq version for the first time.
+
 # This version only sets the local files and frequently changed
 # options, and then includes the standard makefile pointed to by CLAWMAKE.
 CLAWMAKE = $(CLAW)/clawutil/src/Makefile.common
@@ -13,16 +22,34 @@ CLAWMAKE = $(CLAW)/clawutil/src/Makefile.common
 
 CLAW_PKG = geoclaw                  # Clawpack package to use
 
-# These environment variables need to be set properly, usually in your shell:
-# (or set these variable explicitly here in the Makefile)
-#PETSC_DIR=/Users/rjl/petsc
+# These environment variables need to be set properly, usually in your
+# shell, but they could be explicitly set here:
+#PETSC_DIR=/full/path/to/petsc
 #PETSC_ARCH=arch-darwin-c-opt
-#PETSC_OPTIONS=-options_file /Users/rjl/petscMPIoptions
-# sets the PETSc convergence criteria, etc.
-# the settings used for the paper are in  ImplicitAMR-paper/petscMPIoptions
+
+# The file petscMPIoptions sets parameters for MPI and the iterative solver:
+# PETSC_OPTIONS must be set as an environment variable!
+# e.g. in bash:
+#   export PETSC_OPTIONS="-options_file $CLAW/geoclaw/examples/bouss/petscMPIoptions"
+
+ifndef PETSC_DIR
+  $(error PETSC_DIR not set)
+endif
+
+ifndef PETSC_ARCH
+  $(error PETSC_ARCH not set)
+endif
+
+ifndef PETSC_OPTIONS
+  PETSC_OPTIONS=MISSING
+  $(error PETSC_OPTIONS must be declared as environment variable)
+endif
+
+# How many MPI processes to use:
+BOUSS_MPI_PROCS ?= 6
 
 EXE = $(PWD)/xgeoclaw
-RUNEXE="${PETSC_DIR}/${PETSC_ARCH}/bin/mpiexec -n 6 "
+RUNEXE="${PETSC_DIR}/${PETSC_ARCH}/bin/mpiexec -n ${BOUSS_MPI_PROCS}"
 SETRUN_FILE = setrun.py           # File containing function to make data
 OUTDIR = _output                  # Directory for output
 SETPLOT_FILE = setplot.py         # File containing function to set plots
@@ -86,8 +113,8 @@ SOURCES = \
 # Include Makefile containing standard definitions and make options:
 include $(CLAWMAKE)
 
-# Construct the topography data
-.PHONY: topo all
+.PHONY: topo all check
+
 topo:
 	python fetch_topo.py
 
@@ -96,5 +123,14 @@ all:
 	$(MAKE) .plots
 	$(MAKE) .htmls
 
-run:
-	$(RUNEXE)
+check:
+	@echo ===================
+	@echo CLAW = $(CLAW)
+	@echo OMP_NUM_THREADS = $(OMP_NUM_THREADS)
+	@echo BOUSS_MPI_PROCS = $(BOUSS_MPI_PROCS)
+	@env | grep PETSC_OPTIONS
+	@echo PETSC_DIR = $(PETSC_DIR)
+	@echo PETSC_ARCH = $(PETSC_ARCH)
+	@echo RUNEXE = $(RUNEXE)
+	@echo FFLAGS = $(FFLAGS)
+	@echo ===================
