@@ -61,8 +61,8 @@ clearly how each run was set up.
    that are commented out.
 
  - The version of this repository used for the resubmitted paper is tagged as
-   `resubmitted_march2024`.  A zip file of the code used for the final
-   published paper will be archived in the Supplementary Materials
-   for the paper, and will also be archived on Zenodo.
-   
-   
+   `resubmitted_march2024`.  This code was cleaned up a bit more
+   and tagged `publication` for the version to be archived in the
+   Supplementary Materials for the paper, and will also be archived on 
+   zenodo.org.
+
