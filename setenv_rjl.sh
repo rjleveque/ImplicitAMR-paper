@@ -1,7 +1,7 @@
 # These environment variables need to be properly set for your computer:
 
-#export CLAW=/Users/rjl/clawpack_src/clawpack_master
-#export PYTHONPATH=$CLAW
+export CLAW=/Users/rjl/clawpack_src/clawpack-v5.10.0
+export PYTHONPATH=$CLAW  # not needed if you pip install clawpack
 echo CLAW is set to $CLAW
 
 export PETSC_DIR=/Users/rjl/git/Clones/petsc

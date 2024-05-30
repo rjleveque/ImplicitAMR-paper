@@ -446,7 +446,7 @@ def setgeo(rundata):
     from clawpack.geoclaw.data import BoussData
     rundata.add_data(BoussData(),'bouss_data')
     
-    rundata.bouss_data.bouss_equations = 0    # 0=SWE, 1=MS, 2=SGN
+    rundata.bouss_data.bouss_equations = 2    # 0=SWE, 1=MS, 2=SGN
     rundata.bouss_data.bouss_min_level = 1    # coarsest level to apply bouss
     rundata.bouss_data.bouss_max_level = 10   # finest level to apply bouss
     rundata.bouss_data.bouss_min_depth = 5.  # depth to switch to SWE

@@ -11,19 +11,21 @@ manuscript
 which is available as a [preprint](https://arxiv.org/abs/2307.05816).
 **[v2]**
 
+This paper has now been accepted for publication in the [SIAM Journal on
+Scientific Computing](https://www.siam.org/publications/journals/siam-journal-on-scientific-computing-sisc).
+
 The python scripts setrun.py in each directory may be useful to see more
 clearly how each run was set up.
 
 
-**Notes:** (Revised March 2024)
+**Notes:** (Revised June 2024)
 
- - The version of [GeoClaw](http://www.geoclaw.org) needed to run the code in this repository
-   was recently merged into the master branch of
-   https://github.com/clawpack/geoclaw and is freely available there.
+ - The version of [GeoClaw](http://www.geoclaw.org)
+   needed to run the code in this repository
+   was recently released in Clawpack v5.10.0.
+   See https://www.clawpack.org/releases.html for links and release notes.
    
- - This code has now been released in
-   [Clawpack v5.10.0](https://www.clawpack.org/release_5_10_0.html).
-   It is also permanently archived on Zenodo, and at this
+   All releases of Clawpack are also permanently archived on Zenodo and at this
    DOI: https://doi.org/10.17605/osf.io/kmw6h.
 
  - Clawpack v5.10.0 includes both:
@@ -61,6 +63,6 @@ clearly how each run was set up.
  - The version of this repository used for the resubmitted paper is tagged as
    `resubmitted_march2024`.  A zip file of the code used for the final
    published paper will be archived in the Supplementary Materials
-   for the paper, and will eventually also be archived on Zenodo.
+   for the paper, and will also be archived on Zenodo.
    
    
