@@ -63,6 +63,6 @@ clearly how each run was set up.
  - The version of this repository used for the resubmitted paper is tagged as
    `resubmitted_march2024`.  This code was cleaned up a bit more
    and tagged `publication` for the version to be archived in the
-   Supplementary Materials for the paper, and will also be archived on 
-   zenodo.org.
+   Supplementary Materials for the paper, and is also archived at
+   [DOI 10.5281/zenodo.12709453](https://zenodo.org/doi/10.5281/zenodo.12709451).
 
