@@ -2,23 +2,24 @@
 # ImplicitAMR-paper
 
 This repository contains the code used to set up and run the examples in the
-manuscript
+publication [DOI 10.1137/23M1585210](https://doi.org/10.1137/23M1585210)
 
     Implicit Adaptive Mesh Refinement for Dispersive Tsunami Propagation
-    by Marsha J. Berger and Randall J. LeVeque, submitted, 2023
-    (Revised manuscript submitted March, 2024 with updated examples)
+    by Marsha J. Berger and Randall J. LeVeque,
+    SIAM J. Sci. Comput. 46 (2024) pp. B554 - B578.  DOI 10.1137/23M1585210.
 
-which is available as a [preprint](https://arxiv.org/abs/2307.05816).
+The revised version (nearly final) submitted in March, 2024 is also available as a
+[preprint](https://arxiv.org/abs/2307.05816).
 **[v2]**
 
-This paper has now been accepted for publication in the [SIAM Journal on
-Scientific Computing](https://www.siam.org/publications/journals/siam-journal-on-scientific-computing-sisc).
-
-The python scripts setrun.py in each directory may be useful to see more
-clearly how each run was set up.
+See also https://faculty.washington.edu/rjl/pubs/mjb-rjl-implicit-2023
 
 
 **Notes:** (Revised June 2024)
+
+ - The python scripts setrun.py in each directory of this repository
+   may be useful to see more clearly how each run was set up, even if
+   you do not want to run the code.
 
  - The version of [GeoClaw](http://www.geoclaw.org)
    needed to run the code in this repository
