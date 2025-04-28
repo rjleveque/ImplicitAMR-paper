@@ -41,6 +41,8 @@ clearly how each run was set up.
        `radial_shelf_beach_nonlinear`.
        See https://www.clawpack.org/geoclaw1d.html.
 
+ - See below for v5.12.0 updates!
+
  - To run the codes using MPI for the implicit solves via PETSc,
    combined with OpenMP for the explicit time stepping in the shallow
    water steps (distributing grid patches between threads), it is
@@ -65,4 +67,11 @@ clearly how each run was set up.
    and tagged `publication` for the version to be archived in the
    Supplementary Materials for the paper, and will also be archived on 
    zenodo.org.
+
+
+**Additional Notes:** (Added May 2025)
+
+ - GeoClaw from Clawpack 5.12.0 has an improved version of the implicit
+   solvers using PETSc, with several bugs fixed.  The `geoclaw_v5.12` branch
+   of this repository has updated Makefiles to use with the newer verion.
 
