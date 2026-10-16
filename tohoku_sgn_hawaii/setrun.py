@@ -399,7 +399,7 @@ def setrun(claw_pkg='geoclaw'):
     rundata.bouss_data.bouss_min_level = 1    # coarsest level to apply bouss
     rundata.bouss_data.bouss_max_level = 10   # finest level to apply bouss
     rundata.bouss_data.bouss_min_depth = 20.  # depth to switch to SWE
-    rundata.bouss_data.bouss_solver = 3       # 1=GMRES, 2=Pardiso, 3=PETSc
+    rundata.bouss_data.bouss_solver = 1       # 1=GMRES, 2=Pardiso, 3=PETSc
     rundata.bouss_data.bouss_tstart = 0.      # time to switch from SWE
 
     # Omit source terms for sphere, as in v5.9.2 and earlier.
@@ -467,7 +467,6 @@ def setgeo(rundata):
     # for moving topography, append lines of the form :   (<= 1 allowed for now!)
     #   [topotype, fname]
     
-    #dtopodir = '/Users/rjl/git/tohoku2011-paper1/sources/'
     dtopodir = './'
     dtopo_data.dtopofiles.append([1,1,4,dtopodir+'UCSB3.txydz'])
     #dtopo_data.dtopofiles.append([1,1,1,dtopodir+'fujii.txydz'])

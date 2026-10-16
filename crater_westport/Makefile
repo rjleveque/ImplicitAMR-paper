@@ -1,12 +1,11 @@
 # Makefile for Clawpack code in this directory.
 
-# Version for Boussinesq solvers in GeoClaw, which requires PETSc and MPI
-# See https://www.clawpack.org/bouss2d.html
+# Version for Boussinesq solvers in GeoClaw that DO NOT require PETSc,
+# introduced in v5.15.0.  For this version, you must set
+#   rundata.bouss_data.bouss_solver = 1
+# in setrun.py.   See https://www.clawpack.org/bouss2d.html
 #
-# Execute this command to check that enviornment variables set properly:
-#    make check
-# before compiling or executing the code!
-# Then do `make new` if using the Boussinesq version for the first time.
+# Do `make new` if using this Boussinesq version for the first time.
 
 # This version only sets the local files and frequently changed
 # options, and then includes the standard makefile pointed to by CLAWMAKE.
@@ -16,40 +15,18 @@ CLAWMAKE = $(CLAW)/clawutil/src/Makefile.common
 #   make .help
 # at the unix prompt.
 
-
 # Adjust these variables if desired:
 # ----------------------------------
 
 CLAW_PKG = geoclaw                  # Clawpack package to use
 
-# These environment variables need to be set properly, usually in your
-# shell, but they could be explicitly set here:
-#PETSC_DIR=/full/path/to/petsc
-#PETSC_ARCH=arch-darwin-c-opt
+# Several environment variables are expected in this Makefile,
+# as set for example in the bash script
+#     $CLAW/geoclaw/examples/bouss/setenv.sh
+# Some of these could instead be set here explicitly.
 
-# The file petscMPIoptions sets parameters for MPI and the iterative solver:
-# PETSC_OPTIONS must be set as an environment variable!
-# e.g. in bash:
-#   export PETSC_OPTIONS="-options_file $CLAW/geoclaw/examples/bouss/petscMPIoptions"
-
-ifndef PETSC_DIR
-  $(error PETSC_DIR not set)
-endif
-
-ifndef PETSC_ARCH
-  $(error PETSC_ARCH not set)
-endif
-
-ifndef PETSC_OPTIONS
-  PETSC_OPTIONS=MISSING
-  $(error PETSC_OPTIONS must be declared as environment variable)
-endif
-
-# How many MPI processes to use:
-BOUSS_MPI_PROCS ?= 6
 
 EXE = $(PWD)/xgeoclaw
-RUNEXE="${PETSC_DIR}/${PETSC_ARCH}/bin/mpiexec -n ${BOUSS_MPI_PROCS}"
 SETRUN_FILE = setrun.py           # File containing function to make data
 OUTDIR = _output                  # Directory for output
 SETPLOT_FILE = setplot.py         # File containing function to set plots
@@ -58,17 +35,9 @@ PLOTDIR = _plots                  # Directory for plots
 
 # Environment variable FC should be set to fortran compiler, e.g. gfortran
 
-FC = gfortran
-
-# Some compiler flags below are needed for PETSc
-PETSC_INCLUDE = $(PETSC_DIR)/include $(PETSC_DIR)/$(PETSC_ARCH)/include         
-INCLUDE += $(PETSC_INCLUDE)
-PETSC_LFLAGS = $(shell PKG_CONFIG_PATH=$(PETSC_DIR)/$(PETSC_ARCH)/lib/pkgconfig pkg-config --libs-only-L --libs-only-l PETSc)
-
+# Compiler flags can be specified here or set as an environment variable
 FFLAGS ?= -O  -gno-strict-dwarf -fbounds-check  -fopenmp \
       -std=legacy -ffpe-trap='invalid,overflow,zero'
-FFLAGS += -DHAVE_PETSC -ffree-line-length-none
-LFLAGS += $(PETSC_LFLAGS) -fopenmp
 
 
 # ---------------------------------
@@ -123,14 +92,3 @@ all:
 	$(MAKE) .plots
 	$(MAKE) .htmls
 
-check:
-	@echo ===================
-	@echo CLAW = $(CLAW)
-	@echo OMP_NUM_THREADS = $(OMP_NUM_THREADS)
-	@echo BOUSS_MPI_PROCS = $(BOUSS_MPI_PROCS)
-	@env | grep PETSC_OPTIONS
-	@echo PETSC_DIR = $(PETSC_DIR)
-	@echo PETSC_ARCH = $(PETSC_ARCH)
-	@echo RUNEXE = $(RUNEXE)
-	@echo FFLAGS = $(FFLAGS)
-	@echo ===================

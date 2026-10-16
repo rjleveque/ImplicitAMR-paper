@@ -13,6 +13,8 @@ import csv
 t_shelf = 0.   # time approaching continental slope
 t_fine = 0.  # time approaching shore (need to incorporate subsidence if >0)
 
+np.set_printoptions(legacy="1.25")
+
 
 
 #------------------------------
@@ -132,7 +134,7 @@ def setrun(claw_pkg='geoclaw'):
         # Specify a list or numpy array of output times:
         # Include t0 if you want output at the initial time.
         #clawdata.output_times = [251.] + list(np.arange(300,3001,10)) #
-        clawdata.output_times = [251.] + list(np.arange(10,51,10)*60) #
+        clawdata.output_times = [251.] + list(np.arange(10,51,10)*60)
  
     elif clawdata.output_style == 3:
         # Output every step_interval timesteps over total_steps timesteps:
@@ -440,7 +442,7 @@ def setgeo(rundata):
     rundata.bouss_data.bouss_min_level = 1    # coarsest level to apply bouss
     rundata.bouss_data.bouss_max_level = 10   # finest level to apply bouss
     rundata.bouss_data.bouss_min_depth = 5.  # depth to switch to SWE
-    rundata.bouss_data.bouss_solver = 3       # 1=GMRES, 2=Pardiso, 3=PETSc
+    rundata.bouss_data.bouss_solver = 1       # 1=GMRES, 2=Pardiso, 3=PETSc
     rundata.bouss_data.bouss_tstart = 0.      # time to switch from SWE
 
     # Omit source terms for sphere, as in v5.9.2 and earlier.
