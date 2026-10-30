@@ -42,6 +42,8 @@ See also https://faculty.washington.edu/rjl/pubs/mjb-rjl-implicit-2023
        `radial_shelf_beach_nonlinear`.
        See https://www.clawpack.org/geoclaw1d.html.
 
+ - See below for v5.12.0 and v5.15.0 updates
+
  - To run the codes using MPI for the implicit solves via PETSc,
    combined with OpenMP for the explicit time stepping in the shallow
    water steps (distributing grid patches between threads), it is
@@ -67,3 +69,21 @@ See also https://faculty.washington.edu/rjl/pubs/mjb-rjl-implicit-2023
    Supplementary Materials for the paper, and is also archived at
    [DOI 10.5281/zenodo.12709453](https://zenodo.org/doi/10.5281/zenodo.12709451).
 
+
+**Additional Notes:** 
+
+Modifications to GeoClaw since the paper was submitted are not reflected
+in the published results. The newer versions give very similar results.
+
+*May, 2025*
+
+ - GeoClaw from Clawpack 5.12.0 has an improved version of the implicit
+   solvers using PETSc, with several bugs fixed.  The `geoclaw_v5.12` branch
+   of this repository has updated Makefiles to use with the newer version.
+
+*November, 2026*
+
+- GeoClaw from Clawpack 5.15.0 contains a new version of the Boussinesq
+  solvers that does not require PETSc or MPI.  Updated Makefiles and
+  setrun.py scripts to use that version are on the `geoclaw_v5.15_gmres`
+  branch.
